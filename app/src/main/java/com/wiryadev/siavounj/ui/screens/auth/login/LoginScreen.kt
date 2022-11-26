@@ -1,9 +1,9 @@
 package com.wiryadev.siavounj.ui.screens.auth.login
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -23,36 +23,35 @@ import com.wiryadev.siavounj.ui.theme.body3Bold
 @Composable
 fun LoginScreen(
     onLoginSubmitted: (email: String, password: String) -> Unit,
+    onSignUpClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var showBranding by remember { mutableStateOf(true) }
-    
-    Scaffold(
-        modifier = modifier
-    ) { padding ->
-        LoginSignUpScreen(
-            padding = padding,
-            showBranding = showBranding,
-            header = {
-                AuthHeader(
-                    bodyText = stringResource(R.string.login_body_title),
-                    hintText = stringResource(R.string.login_hint_subtitle),
-                )
-            },
-            content = {
-                LoginContent(
-                    onFocusChange = { focused -> showBranding = !focused},
-                    onLoginSubmitted = onLoginSubmitted,
-                )
-            },
-        )
-    }
+
+    LoginSignUpScreen(
+        showBranding = showBranding,
+        modifier = modifier,
+        header = {
+            AuthHeader(
+                bodyText = stringResource(R.string.login_body_title),
+                hintText = stringResource(R.string.login_hint_subtitle),
+            )
+        },
+        content = {
+            LoginContent(
+                onFocusChange = { focused -> showBranding = !focused },
+                onLoginSubmitted = onLoginSubmitted,
+                onSignUpClicked = onSignUpClicked,
+            )
+        },
+    )
 }
 
 @Composable
 fun LoginContent(
     onFocusChange: (Boolean) -> Unit,
     onLoginSubmitted: (email: String, password: String) -> Unit,
+    onSignUpClicked: () -> Unit,
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
         val focusRequester = remember { FocusRequester() }
@@ -111,6 +110,7 @@ fun LoginContent(
                 style = body3Bold.copy(
                     color = MaterialTheme.colors.primary,
                 ),
+                modifier = Modifier.clickable { onSignUpClicked() }
             )
         }
     }
