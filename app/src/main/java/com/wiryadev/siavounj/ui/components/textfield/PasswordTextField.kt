@@ -97,8 +97,9 @@ fun TextFieldError(textError: String) {
         Spacer(modifier = Modifier.width(16.dp))
         Text(
             text = textError,
+            style = MaterialTheme.typography.caption,
+            color = MaterialTheme.colors.error,
             modifier = Modifier.fillMaxWidth(),
-            color = MaterialTheme.colors.error
         )
     }
 }

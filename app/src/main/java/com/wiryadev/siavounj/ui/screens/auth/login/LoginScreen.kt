@@ -1,9 +1,6 @@
 package com.wiryadev.siavounj.ui.screens.auth.login
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
@@ -19,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.wiryadev.siavounj.R
 import com.wiryadev.siavounj.ui.components.AuthHeader
 import com.wiryadev.siavounj.ui.components.textfield.*
+import com.wiryadev.siavounj.ui.screens.LoginSignUpScreen
 import com.wiryadev.siavounj.ui.theme.body3
 import com.wiryadev.siavounj.ui.theme.body3Bold
 
@@ -32,31 +30,22 @@ fun LoginScreen(
     Scaffold(
         modifier = modifier
     ) { padding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-                    .padding(horizontal = 16.dp)
-            ) {
-                Spacer(modifier = Modifier.height(56.dp))
-                AnimatedVisibility(visible = showBranding){
-                    AuthHeader(
-                        bodyText = stringResource(R.string.login_body_title),
-                        hintText = stringResource(R.string.login_hint_subtitle),
-                    )
-                }
-                Spacer(modifier = Modifier.height(32.dp))
+        LoginSignUpScreen(
+            padding = padding,
+            showBranding = showBranding,
+            header = {
+                AuthHeader(
+                    bodyText = stringResource(R.string.login_body_title),
+                    hintText = stringResource(R.string.login_hint_subtitle),
+                )
+            },
+            content = {
                 LoginContent(
                     onFocusChange = { focused -> showBranding = !focused},
                     onLoginSubmitted = onLoginSubmitted,
                 )
-            }
-        }
+            },
+        )
     }
 }
 
