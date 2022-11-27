@@ -19,6 +19,7 @@ val Neutral900 = Color(0xFF374151)
 /**
  * Debutante
  */
+val Debutante300 = Color(0xFFFAB9A4)
 val Debutante500 = Color(0xFFF07167)
 val Debutante600 = Color(0xFFCE4B4C)
 val Debutante700 = Color(0xFFAC333F)
@@ -29,3 +30,8 @@ val Debutante900 = Color(0xFF73132C)
  * Joust Blue
  */
 val JoustBlue600 = Color(0xFF3E86D4)
+
+/**
+ * Drunken
+ */
+val Drunken500 = Color(0xFF35D683)

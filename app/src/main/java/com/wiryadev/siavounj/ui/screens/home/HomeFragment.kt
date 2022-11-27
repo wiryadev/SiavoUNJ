@@ -20,9 +20,7 @@ class HomeFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 SiavoUNJTheme {
-                    Surface {
-                        Text(text = "Home")
-                    }
+                    HomeScreen()
                 }
             }
         }

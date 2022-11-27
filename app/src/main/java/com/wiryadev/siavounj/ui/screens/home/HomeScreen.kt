@@ -1,5 +1,6 @@
 package com.wiryadev.siavounj.ui.screens.home
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -15,8 +16,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.ButtonColors
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
@@ -38,21 +42,34 @@ import coil.compose.SubcomposeAsyncImage
 import com.wiryadev.siavounj.R
 import com.wiryadev.siavounj.data.model.Student
 import com.wiryadev.siavounj.data.model.previewStudent
+import com.wiryadev.siavounj.ui.theme.Debutante300
+import com.wiryadev.siavounj.ui.theme.Debutante600
+import com.wiryadev.siavounj.ui.theme.Drunken500
 import com.wiryadev.siavounj.ui.theme.JoustBlue600
 import com.wiryadev.siavounj.ui.theme.Neutral500
 import com.wiryadev.siavounj.ui.theme.Neutral800
+import com.wiryadev.siavounj.ui.theme.Neutral900
 import com.wiryadev.siavounj.ui.theme.SiavoUNJTheme
 import com.wiryadev.siavounj.ui.theme.body1Bold
 import com.wiryadev.siavounj.ui.theme.body2Bold
 import com.wiryadev.siavounj.ui.theme.body2Medium
 import com.wiryadev.siavounj.ui.theme.body3
+import com.wiryadev.siavounj.ui.theme.body3Bold
+import com.wiryadev.siavounj.ui.theme.body3Medium
 
 @Composable
 fun HomeScreen(
-
+    modifier: Modifier = Modifier,
 ) {
-    Column {
-
+    Column(
+        verticalArrangement = Arrangement.spacedBy(32.dp),
+        modifier = modifier.fillMaxSize(),
+    ) {
+        HomeTopSection(
+            student = previewStudent,
+            onViewDetailClick = {},
+        )
+        GuideSection()
     }
 }
 
@@ -74,17 +91,15 @@ fun HomeTopSection(
         ) = createRefs()
 
         AsyncImage(
-            model = R.drawable.bg_top_plain,
+            model = R.drawable.bg_home_top,
             contentDescription = null,
             contentScale = ContentScale.FillBounds,
-            modifier = Modifier
-                .background(Color.Green)
-                .constrainAs(background) {
-                    top.linkTo(parent.top)
-                    bottom.linkTo(userCard.top, margin = (-96).dp)
-                    width = Dimension.matchParent
-                    height = Dimension.fillToConstraints
-                },
+            modifier = Modifier.constrainAs(background) {
+                top.linkTo(parent.top)
+                bottom.linkTo(userCard.top, margin = (-96).dp)
+                width = Dimension.matchParent
+                height = Dimension.fillToConstraints
+            },
         )
 
         Text(
@@ -122,6 +137,115 @@ fun HomeTopSectionPreview() {
                 student = previewStudent,
                 onViewDetailClick = {},
             )
+        }
+    }
+}
+
+@Composable
+fun HomeBodySectionSlot(
+    label: String,
+    modifier: Modifier = Modifier,
+    viewAll: (@Composable () -> Unit)? = null,
+    content: @Composable () -> Unit,
+) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        modifier = modifier.fillMaxWidth(),
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.padding(horizontal = 16.dp),
+        ) {
+            Text(
+                text = label,
+                style = body1Bold,
+                color = Neutral900,
+            )
+            viewAll?.invoke()
+        }
+        content()
+    }
+}
+
+@Composable
+fun GuideSection(
+    modifier: Modifier = Modifier,
+) {
+    HomeBodySectionSlot(
+        label = stringResource(R.string.panduan)
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            modifier = modifier.padding(horizontal = 16.dp),
+        ) {
+            GuideItem(
+                title = stringResource(R.string.pengumpulan_berkas),
+                illustration = R.drawable.illustration_submit_files,
+                backgroundColor = Debutante300,
+                modifier = Modifier.weight(1f),
+                onGuideClick = {},
+            )
+            GuideItem(
+                title = stringResource(R.string.penggunaan_aplikasi),
+                illustration = R.drawable.illustration_using_app,
+                backgroundColor = Drunken500,
+                modifier = Modifier.weight(1f),
+                onGuideClick = {},
+            )
+        }
+    }
+}
+
+@Preview
+@Composable
+fun GuideSectionPreview() {
+    SiavoUNJTheme {
+        Box(
+            modifier = Modifier
+                .background(MaterialTheme.colors.background)
+                .padding(16.dp),
+        ) {
+            GuideSection()
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun GuideItem(
+    title: String,
+    @DrawableRes illustration: Int,
+    backgroundColor: Color,
+    modifier: Modifier = Modifier,
+    onGuideClick: () -> Unit,
+) {
+    Card(
+        onClick = onGuideClick,
+        modifier = modifier,
+    ) {
+        Box {
+            AsyncImage(
+                model = illustration,
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(160.dp)
+                    .background(backgroundColor),
+            )
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .background(MaterialTheme.colors.background)
+                    .fillMaxWidth()
+                    .align(Alignment.BottomCenter)
+                    .padding(vertical = 12.dp),
+            ) {
+                Text(
+                    text = title,
+                    style = body3Medium,
+                    color = Neutral800,
+                )
+            }
         }
     }
 }
@@ -231,10 +355,12 @@ fun UserSectionBottom(
             UserApplicationStatistic(
                 label = stringResource(R.string.total_pengajuan),
                 value = totalApply,
+                valueTextColor = Debutante600,
             )
             UserApplicationStatistic(
                 label = stringResource(R.string.status_diterima),
                 value = applyAccepted,
+                valueTextColor = JoustBlue600,
             )
         }
         Spacer(modifier = Modifier.height(12.dp))
@@ -248,6 +374,7 @@ fun UserSectionBottom(
 fun UserApplicationStatistic(
     label: String,
     value: Int,
+    valueTextColor: Color,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -263,7 +390,7 @@ fun UserApplicationStatistic(
         Text(
             text = value.toString(),
             style = body2Bold,
-            color = Neutral800,
+            color = valueTextColor,
         )
     }
 }

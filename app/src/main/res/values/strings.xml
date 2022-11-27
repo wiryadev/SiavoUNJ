@@ -26,4 +26,7 @@
     <string name="total_pengajuan">Total Pengajuan</string>
     <string name="status_diterima">Status Diterima</string>
     <string name="view_detail">View Detail</string>
+    <string name="panduan">Panduan</string>
+    <string name="pengumpulan_berkas">Pengumpulan Berkas</string>
+    <string name="penggunaan_aplikasi">Penggunaan Aplikasi</string>
 </resources>
