@@ -21,4 +21,9 @@
     <string name="discussion">Discussion</string>
     <string name="profile">Profile</string>
     <string name="home">Home</string>
+    <string name="user_profile_picture">User Profile Picture</string>
+    <string name="mahasiswa">Mahasiswa</string>
+    <string name="total_pengajuan">Total Pengajuan</string>
+    <string name="status_diterima">Status Diterima</string>
+    <string name="view_detail">View Detail</string>
 </resources>

@@ -10,6 +10,7 @@ val Teal200 = Color(0xFF03DAC5)
 /**
  * Neutral
  */
+val Neutral500 = Color(0xFFD1D5DB)
 val Neutral600 = Color(0xFF9CA3AF)
 val Neutral700 = Color(0xFF6B7280)
 val Neutral800 = Color(0xFF4B5563)
@@ -23,3 +24,8 @@ val Debutante600 = Color(0xFFCE4B4C)
 val Debutante700 = Color(0xFFAC333F)
 val Debutante800 = Color(0xFF8B2033)
 val Debutante900 = Color(0xFF73132C)
+
+/**
+ * Joust Blue
+ */
+val JoustBlue600 = Color(0xFF3E86D4)
