@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.wiryadev.siavounj.ui.screens.home.HomeFragment"
+        android:label="HomeFragment" />
+
+    <fragment
+        android:id="@+id/nav_discussion"
+        android:name="com.wiryadev.siavounj.ui.screens.discussion.DiscussionFragment"
+        android:label="DiscussionFragment" />
+
+    <fragment
+        android:id="@+id/nav_notification"
+        android:name="com.wiryadev.siavounj.ui.screens.notification.NotificationFragment"
+        android:label="NotificationFragment" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.wiryadev.siavounj.ui.screens.profile.ProfileFragment"
+        android:label="ProfileFragment" />
+
+</navigation>

@@ -3,5 +3,6 @@
 
     <style name="Theme.SiavoUNJ" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:statusBarColor">#AC333F</item>
+        <item name="colorPrimary">#CE4B4C</item>
     </style>
 </resources>
