@@ -29,6 +29,7 @@ val Debutante900 = Color(0xFF73132C)
 /**
  * Joust Blue
  */
+val JoustBlue500 = Color(0xFF56ACF7)
 val JoustBlue600 = Color(0xFF3E86D4)
 
 /**

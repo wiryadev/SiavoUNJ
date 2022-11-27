@@ -7,6 +7,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,9 +16,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.ButtonColors
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
@@ -41,7 +43,9 @@ import coil.compose.AsyncImage
 import coil.compose.SubcomposeAsyncImage
 import com.wiryadev.siavounj.R
 import com.wiryadev.siavounj.data.model.Student
+import com.wiryadev.siavounj.data.model.previewLatestInfo
 import com.wiryadev.siavounj.data.model.previewStudent
+import com.wiryadev.siavounj.ui.components.LatestInfoItem
 import com.wiryadev.siavounj.ui.theme.Debutante300
 import com.wiryadev.siavounj.ui.theme.Debutante600
 import com.wiryadev.siavounj.ui.theme.Drunken500
@@ -54,22 +58,24 @@ import com.wiryadev.siavounj.ui.theme.body1Bold
 import com.wiryadev.siavounj.ui.theme.body2Bold
 import com.wiryadev.siavounj.ui.theme.body2Medium
 import com.wiryadev.siavounj.ui.theme.body3
-import com.wiryadev.siavounj.ui.theme.body3Bold
 import com.wiryadev.siavounj.ui.theme.body3Medium
 
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
 ) {
-    Column(
+    LazyColumn(
         verticalArrangement = Arrangement.spacedBy(32.dp),
         modifier = modifier.fillMaxSize(),
     ) {
-        HomeTopSection(
-            student = previewStudent,
-            onViewDetailClick = {},
-        )
-        GuideSection()
+        item {
+            HomeTopSection(
+                student = previewStudent,
+                onViewDetailClick = {},
+            )
+        }
+        item { GuideSection() }
+        item { LatestInfoSection() }
     }
 }
 
@@ -245,6 +251,33 @@ fun GuideItem(
                     style = body3Medium,
                     color = Neutral800,
                 )
+            }
+        }
+    }
+}
+
+@Composable
+fun LatestInfoSection(
+    modifier: Modifier = Modifier,
+) {
+    HomeBodySectionSlot(
+        label = stringResource(R.string.latest_info)
+    ) {
+        LazyRow(
+            contentPadding = PaddingValues(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            modifier = modifier,
+        ) {
+            items(
+                items = previewLatestInfo,
+                key = { it.id }
+            ) { info ->
+                LatestInfoItem(
+                    title = info.title,
+                    subtitle = info.subtitle,
+                ) {
+
+                }
             }
         }
     }
