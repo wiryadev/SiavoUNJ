@@ -31,4 +31,8 @@
     <string name="penggunaan_aplikasi">Penggunaan Aplikasi</string>
     <string name="see_detail">Lihat Selengkapnya</string>
     <string name="latest_info">Info Terbaru</string>
+    <string name="deadline">Deadline:</string>
+    <string name="scholarship">Beasiswa</string>
+    <string name="view_all">Lihat Semua</string>
+    <string name="intern_opportunity">Lowongan Magang</string>
 </resources>

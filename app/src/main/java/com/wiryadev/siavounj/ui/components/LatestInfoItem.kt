@@ -25,7 +25,7 @@ import coil.compose.AsyncImage
 import com.wiryadev.siavounj.R
 import com.wiryadev.siavounj.ui.theme.JoustBlue500
 import com.wiryadev.siavounj.ui.theme.Neutral800
-import com.wiryadev.siavounj.ui.theme.body1Bold
+import com.wiryadev.siavounj.ui.theme.body1SemiBold
 import com.wiryadev.siavounj.ui.theme.body3
 import com.wiryadev.siavounj.ui.theme.body3Medium
 
@@ -71,7 +71,7 @@ fun LatestInfoItem(
             ) {
                 Text(
                     text = titleFormatted,
-                    style = body1Bold,
+                    style = body1SemiBold,
                     color = Color.White,
                     maxLines = 2,
                 )

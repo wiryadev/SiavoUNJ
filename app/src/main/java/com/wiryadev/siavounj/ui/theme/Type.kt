@@ -66,10 +66,10 @@ val body1Medium: TextStyle
         fontWeight = FontWeight.Medium,
     )
 
-val body1Bold: TextStyle
+val body1SemiBold: TextStyle
     @Composable get() = MaterialTheme.typography.body1.copy(
         fontSize = 16.sp,
-        fontWeight = FontWeight.Bold,
+        fontWeight = FontWeight.SemiBold,
     )
 
 val body2: TextStyle

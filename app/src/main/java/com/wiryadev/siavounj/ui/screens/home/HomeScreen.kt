@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,6 +23,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -43,9 +45,12 @@ import coil.compose.AsyncImage
 import coil.compose.SubcomposeAsyncImage
 import com.wiryadev.siavounj.R
 import com.wiryadev.siavounj.data.model.Student
+import com.wiryadev.siavounj.data.model.previewInternship
 import com.wiryadev.siavounj.data.model.previewLatestInfo
+import com.wiryadev.siavounj.data.model.previewScholarship
 import com.wiryadev.siavounj.data.model.previewStudent
 import com.wiryadev.siavounj.ui.components.LatestInfoItem
+import com.wiryadev.siavounj.ui.components.ScholarshipInternItem
 import com.wiryadev.siavounj.ui.theme.Debutante300
 import com.wiryadev.siavounj.ui.theme.Debutante600
 import com.wiryadev.siavounj.ui.theme.Drunken500
@@ -54,8 +59,8 @@ import com.wiryadev.siavounj.ui.theme.Neutral500
 import com.wiryadev.siavounj.ui.theme.Neutral800
 import com.wiryadev.siavounj.ui.theme.Neutral900
 import com.wiryadev.siavounj.ui.theme.SiavoUNJTheme
-import com.wiryadev.siavounj.ui.theme.body1Bold
-import com.wiryadev.siavounj.ui.theme.body2Bold
+import com.wiryadev.siavounj.ui.theme.body1SemiBold
+import com.wiryadev.siavounj.ui.theme.body2
 import com.wiryadev.siavounj.ui.theme.body2Medium
 import com.wiryadev.siavounj.ui.theme.body3
 import com.wiryadev.siavounj.ui.theme.body3Medium
@@ -76,6 +81,9 @@ fun HomeScreen(
         }
         item { GuideSection() }
         item { LatestInfoSection() }
+        item { ScholarshipSection() }
+        item { InternshipSection() }
+        item { Spacer(modifier = Modifier.height(16.dp)) }
     }
 }
 
@@ -110,7 +118,7 @@ fun HomeTopSection(
 
         Text(
             text = "SIAVO UNJ",
-            style = body1Bold,
+            style = body1SemiBold,
             color = Color.White,
             modifier = Modifier.constrainAs(title) {
                 top.linkTo(parent.top, margin = 40.dp)
@@ -159,12 +167,15 @@ fun HomeBodySectionSlot(
         modifier = modifier.fillMaxWidth(),
     ) {
         Row(
+            verticalAlignment = Alignment.Bottom,
             horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.padding(horizontal = 16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
         ) {
             Text(
                 text = label,
-                style = body1Bold,
+                style = body1SemiBold,
                 color = Neutral900,
             )
             viewAll?.invoke()
@@ -278,6 +289,74 @@ fun LatestInfoSection(
                 ) {
 
                 }
+            }
+        }
+    }
+}
+
+@Composable
+fun ScholarshipSection(
+    modifier: Modifier = Modifier,
+) {
+    HomeBodySectionSlot(
+        label = stringResource(R.string.scholarship),
+        viewAll = {
+            Text(
+                text = stringResource(R.string.view_all),
+                style = body2,
+                color = Debutante600,
+                modifier = Modifier.clickable { }
+            )
+        }
+    ) {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+            modifier = modifier.padding(horizontal = 16.dp),
+        ) {
+            previewScholarship.forEach { scholarship ->
+                ScholarshipInternItem(
+                    itemId = scholarship.id,
+                    organizerLogo = R.drawable.tut_wuri_handayani,
+                    title = scholarship.title,
+                    description = scholarship.description,
+                    deadline = scholarship.deadline,
+                    onItemClick = {},
+                )
+                Divider()
+            }
+        }
+    }
+}
+
+@Composable
+fun InternshipSection(
+    modifier: Modifier = Modifier,
+) {
+    HomeBodySectionSlot(
+        label = stringResource(R.string.intern_opportunity),
+        viewAll = {
+            Text(
+                text = stringResource(R.string.view_all),
+                style = body2,
+                color = Debutante600,
+                modifier = Modifier.clickable { }
+            )
+        }
+    ) {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+            modifier = modifier.padding(horizontal = 16.dp),
+        ) {
+            previewInternship.forEach { internship ->
+                ScholarshipInternItem(
+                    itemId = internship.id,
+                    organizerLogo = R.drawable.kampus_merdeka,
+                    title = internship.title,
+                    description = internship.description,
+                    deadline = internship.deadline,
+                    onItemClick = {},
+                )
+                Divider()
             }
         }
     }
@@ -411,7 +490,7 @@ fun UserApplicationStatistic(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier,
     ) {
@@ -422,7 +501,7 @@ fun UserApplicationStatistic(
         )
         Text(
             text = value.toString(),
-            style = body2Bold,
+            style = body1SemiBold,
             color = valueTextColor,
         )
     }
