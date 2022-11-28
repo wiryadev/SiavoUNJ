@@ -3,7 +3,6 @@ package com.wiryadev.siavounj.ui.screens.home
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,14 +14,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
@@ -31,7 +27,6 @@ import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
@@ -42,22 +37,21 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import coil.compose.AsyncImage
-import coil.compose.SubcomposeAsyncImage
 import com.wiryadev.siavounj.R
 import com.wiryadev.siavounj.data.model.Student
 import com.wiryadev.siavounj.data.model.previewInternship
 import com.wiryadev.siavounj.data.model.previewLatestInfo
 import com.wiryadev.siavounj.data.model.previewScholarship
 import com.wiryadev.siavounj.data.model.previewStudent
+import com.wiryadev.siavounj.ui.components.CommonSectionSlot
 import com.wiryadev.siavounj.ui.components.LatestInfoItem
 import com.wiryadev.siavounj.ui.components.ScholarshipInternItem
+import com.wiryadev.siavounj.ui.components.UserProfilePicture
 import com.wiryadev.siavounj.ui.theme.Debutante300
 import com.wiryadev.siavounj.ui.theme.Debutante600
 import com.wiryadev.siavounj.ui.theme.Drunken500
 import com.wiryadev.siavounj.ui.theme.JoustBlue600
-import com.wiryadev.siavounj.ui.theme.Neutral500
 import com.wiryadev.siavounj.ui.theme.Neutral800
-import com.wiryadev.siavounj.ui.theme.Neutral900
 import com.wiryadev.siavounj.ui.theme.SiavoUNJTheme
 import com.wiryadev.siavounj.ui.theme.body1SemiBold
 import com.wiryadev.siavounj.ui.theme.body2
@@ -156,39 +150,10 @@ fun HomeTopSectionPreview() {
 }
 
 @Composable
-fun HomeBodySectionSlot(
-    label: String,
-    modifier: Modifier = Modifier,
-    viewAll: (@Composable () -> Unit)? = null,
-    content: @Composable () -> Unit,
-) {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(12.dp),
-        modifier = modifier.fillMaxWidth(),
-    ) {
-        Row(
-            verticalAlignment = Alignment.Bottom,
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-        ) {
-            Text(
-                text = label,
-                style = body1SemiBold,
-                color = Neutral900,
-            )
-            viewAll?.invoke()
-        }
-        content()
-    }
-}
-
-@Composable
 fun GuideSection(
     modifier: Modifier = Modifier,
 ) {
-    HomeBodySectionSlot(
+    CommonSectionSlot(
         label = stringResource(R.string.panduan)
     ) {
         Row(
@@ -237,6 +202,7 @@ fun GuideItem(
     onGuideClick: () -> Unit,
 ) {
     Card(
+        elevation = 4.dp,
         onClick = onGuideClick,
         modifier = modifier,
     ) {
@@ -271,7 +237,7 @@ fun GuideItem(
 fun LatestInfoSection(
     modifier: Modifier = Modifier,
 ) {
-    HomeBodySectionSlot(
+    CommonSectionSlot(
         label = stringResource(R.string.latest_info)
     ) {
         LazyRow(
@@ -298,7 +264,7 @@ fun LatestInfoSection(
 fun ScholarshipSection(
     modifier: Modifier = Modifier,
 ) {
-    HomeBodySectionSlot(
+    CommonSectionSlot(
         label = stringResource(R.string.scholarship),
         viewAll = {
             Text(
@@ -332,7 +298,7 @@ fun ScholarshipSection(
 fun InternshipSection(
     modifier: Modifier = Modifier,
 ) {
-    HomeBodySectionSlot(
+    CommonSectionSlot(
         label = stringResource(R.string.intern_opportunity),
         viewAll = {
             Text(
@@ -369,6 +335,7 @@ fun UserSection(
     modifier: Modifier = Modifier,
 ) {
     Card(
+        elevation = 4.dp,
         modifier = modifier.fillMaxWidth(),
     ) {
         Column {
@@ -400,21 +367,7 @@ fun UserSectionTop(
                 horizontal = UserSectionHorizontalPadding,
             ),
         ) {
-            SubcomposeAsyncImage(
-                model = R.drawable.fake_profile_pic,
-                contentDescription = stringResource(R.string.user_profile_picture),
-                loading = { CircularProgressIndicator() },
-                contentScale = ContentScale.FillBounds,
-                modifier = Modifier
-                    .size(size = 48.dp)
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colors.primary)
-                    .border(
-                        width = 1.dp,
-                        color = Neutral500,
-                        shape = CircleShape,
-                    ),
-            )
+            UserProfilePicture(size = 48.dp)
             Column(
                 verticalArrangement = Arrangement.spacedBy(4.dp),
             ) {

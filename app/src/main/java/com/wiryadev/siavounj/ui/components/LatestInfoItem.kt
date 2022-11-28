@@ -47,8 +47,8 @@ fun LatestInfoItem(
         }
     }
     Card(
+        elevation = 4.dp,
         onClick = onInfoClick,
-        backgroundColor = Color.Red,
         modifier = modifier
             .width(300.dp)
             .height(160.dp),
