@@ -2,6 +2,7 @@ package com.wiryadev.siavounj.ui.screens.discussion
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -12,6 +13,10 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.wiryadev.siavounj.R
+import com.wiryadev.siavounj.data.model.previewDiscussionPreview1
+import com.wiryadev.siavounj.data.model.previewDiscussionPreview2
+import com.wiryadev.siavounj.ui.components.CommonSectionSlot
+import com.wiryadev.siavounj.ui.components.DiscussionPreviewItem
 import com.wiryadev.siavounj.ui.components.SearchBar
 import com.wiryadev.siavounj.ui.theme.Debutante500
 import com.wiryadev.siavounj.ui.theme.body1SemiBold
@@ -20,10 +25,13 @@ import com.wiryadev.siavounj.ui.theme.body1SemiBold
 fun DiscussionScreen(
     modifier: Modifier = Modifier,
 ) {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
+    LazyColumn(
+        modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(32.dp),
     ) {
-        DiscussionHeader()
+        item { DiscussionHeader() }
+        item { SavedDiscussions() }
+        item { AllDiscussion() }
     }
 }
 
@@ -53,7 +61,7 @@ fun DiscussionHeader(
         )
 
         Text(
-            text = "Forum Diskusi",
+            text = stringResource(R.string.discussion_forum),
             style = body1SemiBold,
             color = Color.White,
             textAlign = TextAlign.Center,
@@ -75,5 +83,59 @@ fun DiscussionHeader(
                     centerHorizontallyTo(parent)
                 }
         )
+    }
+}
+
+@Composable
+fun SavedDiscussions(
+    modifier: Modifier = Modifier,
+) {
+    CommonSectionSlot(
+        label = stringResource(R.string.saved_discussions),
+    ) {
+        Column(
+            modifier = modifier.padding(horizontal = 16.dp),
+        ) {
+            previewDiscussionPreview1.forEachIndexed { index, discussion ->
+                DiscussionPreviewItem(
+                    id = discussion.id,
+                    title = discussion.title,
+                    lastDiscussion = discussion.lastDiscussion,
+                    latestUpdate = discussion.latestUpdate,
+                    totalUserInvolved = discussion.totalUserInvolved,
+                    totalDiscussionBubble = discussion.totalDiscussionBubble,
+                    onDiscussionClick = {},
+                    modifier = Modifier.padding(
+                        bottom = if (index == previewDiscussionPreview1.size - 1) 0.dp else 12.dp
+                    ),
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun AllDiscussion(
+    modifier: Modifier = Modifier,
+) {
+    CommonSectionSlot(
+        label = stringResource(R.string.all_discussions),
+    ) {
+        Column(
+            modifier = modifier.padding(horizontal = 16.dp),
+        ) {
+            previewDiscussionPreview2.forEach { discussion ->
+                DiscussionPreviewItem(
+                    id = discussion.id,
+                    title = discussion.title,
+                    lastDiscussion = discussion.lastDiscussion,
+                    latestUpdate = discussion.latestUpdate,
+                    totalUserInvolved = discussion.totalUserInvolved,
+                    totalDiscussionBubble = discussion.totalDiscussionBubble,
+                    onDiscussionClick = {},
+                    modifier = Modifier.padding(bottom = 12.dp),
+                )
+            }
+        }
     }
 }

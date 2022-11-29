@@ -38,4 +38,7 @@
     <string name="last_discussion">Diskusi Terakhir</string>
     <string name="latest_update">Update Terbaru:</string>
     <string name="find_discussion_topic">Cari topik diskusi</string>
+    <string name="all_discussions">Semua Diskusi</string>
+    <string name="saved_discussions">Diskusi Tersimpan</string>
+    <string name="discussion_forum">Forum Diskusi</string>
 </resources>
