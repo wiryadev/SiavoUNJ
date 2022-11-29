@@ -4,10 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.runtime.Composable
@@ -22,15 +19,15 @@ import com.wiryadev.siavounj.ui.theme.SiavoUNJTheme
 fun SearchBar(
     query: String,
     onQueryChange: (String) -> Unit,
-    label: String,
+    placeholder: String,
     modifier: Modifier = Modifier,
 ) {
     OutlinedTextField(
         value = query,
         onValueChange = onQueryChange,
-        label = {
+        placeholder = {
             Text(
-                text = label,
+                text = placeholder,
                 style = MaterialTheme.typography.body2,
             )
         },
@@ -42,6 +39,9 @@ fun SearchBar(
                 contentDescription = null,
             )
         },
+        colors = TextFieldDefaults.outlinedTextFieldColors(
+            backgroundColor = MaterialTheme.colors.background,
+        )
     )
 }
 
@@ -57,7 +57,7 @@ fun SearchBarPreview() {
             SearchBar(
                 query = "",
                 onQueryChange = {},
-                label = stringResource(R.string.find_discussion_topic),
+                placeholder = stringResource(R.string.find_discussion_topic),
             )
         }
     }
