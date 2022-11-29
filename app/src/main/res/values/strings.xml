@@ -41,4 +41,5 @@
     <string name="all_discussions">Semua Diskusi</string>
     <string name="saved_discussions">Diskusi Tersimpan</string>
     <string name="discussion_forum">Forum Diskusi</string>
+    <string name="mark_as_read">Tandai sudah dibaca</string>
 </resources>
