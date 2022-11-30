@@ -15,6 +15,7 @@ val Neutral600 = Color(0xFF9CA3AF)
 val Neutral700 = Color(0xFF6B7280)
 val Neutral800 = Color(0xFF4B5563)
 val Neutral900 = Color(0xFF374151)
+val Neutral1000 = Color(0xFF1F2937)
 
 /**
  * Debutante

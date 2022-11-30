@@ -45,4 +45,6 @@
     <string name="unread">Belum Dibaca</string>
     <string name="add_topic">Tambah Topik</string>
     <string name="my_notifications">Notifikasi Saya</string>
+    <string name="change_password">Ganti Password</string>
+    <string name="apply_history">Riwayat Pengajuan Berkas</string>
 </resources>
