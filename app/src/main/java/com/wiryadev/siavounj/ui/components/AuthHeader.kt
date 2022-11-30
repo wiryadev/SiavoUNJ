@@ -15,7 +15,7 @@ import coil.compose.AsyncImage
 import com.wiryadev.siavounj.R
 import com.wiryadev.siavounj.ui.theme.Neutral600
 import com.wiryadev.siavounj.ui.theme.SiavoUNJTheme
-import com.wiryadev.siavounj.ui.theme.body2Bold
+import com.wiryadev.siavounj.ui.theme.body2SemiBold
 import com.wiryadev.siavounj.ui.theme.body3Medium
 
 @Composable
@@ -45,7 +45,7 @@ fun AuthHeader(
         Spacer(modifier = Modifier.height(32.dp))
         Text(
             text = bodyText,
-            style = body2Bold,
+            style = body2SemiBold,
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth(),
         )

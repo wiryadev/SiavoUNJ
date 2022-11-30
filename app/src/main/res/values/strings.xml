@@ -42,6 +42,7 @@
     <string name="saved_discussions">Diskusi Tersimpan</string>
     <string name="discussion_forum">Forum Diskusi</string>
     <string name="mark_as_read">Tandai sudah dibaca</string>
+    <string name="unread">Belum Dibaca</string>
     <string name="add_topic">Tambah Topik</string>
     <string name="my_notifications">Notifikasi Saya</string>
 </resources>

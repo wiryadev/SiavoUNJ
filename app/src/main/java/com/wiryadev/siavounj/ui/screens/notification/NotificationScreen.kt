@@ -36,7 +36,7 @@ import com.wiryadev.siavounj.ui.theme.Debutante500
 import com.wiryadev.siavounj.ui.theme.Debutante600
 import com.wiryadev.siavounj.ui.theme.SiavoUNJTheme
 import com.wiryadev.siavounj.ui.theme.body1SemiBold
-import com.wiryadev.siavounj.ui.theme.body2Bold
+import com.wiryadev.siavounj.ui.theme.body2SemiBold
 import com.wiryadev.siavounj.ui.theme.body3
 import com.wiryadev.siavounj.ui.theme.body3Medium
 
@@ -48,7 +48,7 @@ fun NotificationScreen(
         modifier = modifier,
     ) {
         NotificationAppBar(
-            notificationsAmount = previewNotificationPreview.size,
+            notificationsAmount = previewNotificationPreview.filterNot { it.isRead }.size,
         )
         LazyColumn {
             items(previewNotificationPreview) { item ->
@@ -81,7 +81,7 @@ fun NotificationAppBar(
             .padding(bottom = 16.dp),
     ) {
         Text(
-            text = "SIAVO UNJ",
+            text = stringResource(id = R.string.notification),
             style = body1SemiBold,
             color = Debutante600,
             textAlign = TextAlign.Center,
@@ -98,8 +98,8 @@ fun NotificationAppBar(
         ) {
             Row {
                 Text(
-                    text = stringResource(R.string.my_notifications),
-                    style = body2Bold,
+                    text = stringResource(R.string.unread),
+                    style = body2SemiBold,
                     color = Debutante600,
                 )
                 Spacer(modifier = Modifier.width(8.dp))
